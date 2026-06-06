@@ -1,0 +1,74 @@
+/* Products Page */
+.products-page { padding-top: 5rem; padding-bottom: 4rem; }
+
+.products-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+}
+.products-controls { display: flex; gap: .75rem; align-items: center; }
+
+.sort-select {
+  padding: .5rem 1rem; border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius); font-family: var(--font-body);
+  font-size: .85rem; background: var(--white); cursor: pointer;
+  outline: none;
+}
+.sort-select:focus { border-color: var(--gold); }
+
+.products-layout { display: flex; gap: 2.5rem; align-items: flex-start; }
+
+/* Filter sidebar */
+.filter-sidebar {
+  width: 220px; flex-shrink: 0;
+  background: var(--white); border: 1px solid var(--gray-200);
+  border-radius: var(--radius); padding: 1.25rem;
+  position: sticky; top: 90px;
+}
+.filter-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1.25rem;
+}
+.filter-header h3 { font-size: 1rem; font-weight: 600; }
+
+.filter-group { margin-bottom: 1.5rem; }
+.filter-group h4 {
+  font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gray-400); margin-bottom: .6rem;
+}
+.filter-pill {
+  display: inline-block; margin: .2rem;
+  padding: .3rem .75rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 20px; font-size: .8rem;
+  background: none; cursor: pointer;
+  transition: var(--transition);
+}
+.filter-pill:hover, .filter-pill.active {
+  border-color: var(--gold); background: var(--gold); color: var(--black);
+}
+
+/* Pagination */
+.pagination { display: flex; gap: .5rem; margin-top: 2.5rem; justify-content: center; }
+.page-btn {
+  width: 36px; height: 36px; border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius); background: var(--white);
+  font-size: .9rem; font-weight: 500; cursor: pointer;
+  transition: var(--transition);
+}
+.page-btn:hover   { border-color: var(--gold); }
+.page-btn.active  { background: var(--black); color: var(--white); border-color: var(--black); }
+
+.empty-state {
+  text-align: center; padding: 5rem; color: var(--gray-400);
+  font-size: 1.1rem;
+}
+.empty-state p { margin-bottom: 1rem; }
+
+@media (max-width: 768px) {
+  .filter-sidebar { display: none; }
+  .filter-sidebar.open {
+    display: block; position: fixed; top: 72px; left: 0; bottom: 0;
+    z-index: 900; overflow-y: auto; width: 280px;
+    box-shadow: var(--shadow-lg);
+  }
+}

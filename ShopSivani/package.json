@@ -1,0 +1,16 @@
+{
+  "name": "shopsivani",
+  "version": "1.0.0",
+  "description": "ShopSivani - Full Stack Fashion E-Commerce App by PAKKI BONISHA SIVANI",
+  "scripts": {
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "seed": "cd backend && npm run seed",
+    "build": "cd frontend && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": ["react", "nodejs", "mongodb", "ecommerce", "fashion"],
+  "author": "PAKKI BONISHA SIVANI"
+}

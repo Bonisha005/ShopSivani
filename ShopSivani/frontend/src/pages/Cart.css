@@ -1,0 +1,71 @@
+.cart-page { padding-top: 5rem; padding-bottom: 4rem; }
+
+.cart-empty {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 1rem; text-align: center;
+  min-height: 70vh;
+}
+.cart-empty h2 { font-size: 1.8rem; }
+.cart-empty p  { color: var(--gray-400); }
+
+.cart-layout {
+  display: grid; grid-template-columns: 1fr 360px;
+  gap: 3rem; align-items: start; margin-top: 2rem;
+}
+
+/* Item */
+.cart-item {
+  display: flex; gap: 1.25rem;
+  padding: 1.25rem 0; border-bottom: 1px solid var(--gray-200);
+}
+.cart-img {
+  width: 100px; height: 130px; object-fit: cover;
+  border-radius: var(--radius); flex-shrink: 0;
+}
+.cart-item-info { flex: 1; }
+.cart-item-name { font-weight: 600; font-family: var(--font-display); font-size: 1.05rem; margin-bottom: .3rem; }
+.cart-item-meta { font-size: .82rem; color: var(--gray-400); margin-bottom: .75rem; }
+.cart-item-bottom { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.cart-item-price { font-weight: 700; font-size: 1.05rem; margin-left: auto; }
+.remove-btn {
+  background: none; border: none; color: var(--gray-400);
+  cursor: pointer; padding: .4rem; transition: color .2s;
+}
+.remove-btn:hover { color: var(--red); }
+
+.qty-control {
+  display: flex; align-items: center;
+  border: 1.5px solid var(--gray-200); border-radius: 2px; width: fit-content;
+}
+.qty-control button {
+  width: 32px; height: 32px; background: none; border: none;
+  font-size: 1rem; cursor: pointer;
+  transition: background .15s;
+}
+.qty-control button:hover { background: var(--gray-100); }
+.qty-control span { padding: 0 .75rem; font-weight: 600; font-size: .9rem; }
+
+/* Summary */
+.cart-summary {
+  background: var(--white); border: 1px solid var(--gray-200);
+  border-radius: var(--radius); padding: 1.5rem;
+  position: sticky; top: 90px;
+}
+.cart-summary h3 {
+  font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 1.25rem;
+}
+.summary-row {
+  display: flex; justify-content: space-between;
+  font-size: .9rem; margin-bottom: .75rem; color: var(--gray-600);
+}
+.summary-total { font-size: 1.1rem; font-weight: 700; color: var(--black); }
+.free-ship-note {
+  font-size: .78rem; color: var(--gold); text-align: center;
+  margin-top: .5rem; font-weight: 500;
+}
+.secure-note {
+  text-align: center; font-size: .75rem; color: var(--gray-400);
+  margin-top: .75rem;
+}
+
+@media (max-width: 900px) { .cart-layout { grid-template-columns: 1fr; } }
