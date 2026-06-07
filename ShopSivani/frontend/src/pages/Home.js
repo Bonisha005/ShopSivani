@@ -6,18 +6,18 @@ import AIRecommendations from '../components/AIRecommendations';
 import './Home.css';
 
 const categories = [
-  { label: 'Dresses',    icon: '👗', q: 'Dresses' },
-  { label: 'Tops',       icon: '👚', q: 'Tops' },
-  { label: 'Bottoms',    icon: '👖', q: 'Bottoms' },
-  { label: 'Footwear',   icon: '👠', q: 'Footwear' },
-  { label: 'Accessories',icon: '👜', q: 'Accessories' },
-  { label: 'Activewear', icon: '🏋️', q: 'Activewear' },
+  { label: 'Dresses',     icon: '👗', q: 'Dresses' },
+  { label: 'Tops',        icon: '👚', q: 'Tops' },
+  { label: 'Bottoms',     icon: '👖', q: 'Bottoms' },
+  { label: 'Footwear',    icon: '👠', q: 'Footwear' },
+  { label: 'Accessories', icon: '👜', q: 'Accessories' },
+  { label: 'Activewear',  icon: '🏋️', q: 'Activewear' },
 ];
 
 const Home = () => {
-  const [featured, setFeatured]       = useState([]);
+  const [featured,    setFeatured]    = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
-  const [loading, setLoading]         = useState(true);
+  const [loading,     setLoading]     = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,10 +26,13 @@ const Home = () => {
           api.get('/products/featured'),
           api.get('/products/new-arrivals'),
         ]);
-        setFeatured(f.data);
-        setNewArrivals(n.data);
+        // Safely handle any response format
+        setFeatured(Array.isArray(f.data) ? f.data : f.data?.products || []);
+        setNewArrivals(Array.isArray(n.data) ? n.data : n.data?.products || []);
       } catch (err) {
         console.error(err);
+        setFeatured([]);
+        setNewArrivals([]);
       } finally {
         setLoading(false);
       }
@@ -40,7 +43,7 @@ const Home = () => {
   return (
     <div className="home page">
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <section className="hero">
         <div className="hero-content fade-up">
           <p className="section-label">New Collection 2024</p>
@@ -57,7 +60,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── Categories ── */}
+      {/* Categories */}
       <section className="section container">
         <p className="section-label">Browse By</p>
         <h2 className="section-title">Categories</h2>
@@ -71,12 +74,16 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── Featured ── */}
+      {/* Featured */}
       <section className="section container">
         <p className="section-label">Hand Picked</p>
         <h2 className="section-title">Featured Pieces</h2>
         {loading ? (
           <div className="spinner-wrap"><div className="spinner"></div></div>
+        ) : featured.length === 0 ? (
+          <p style={{color:'var(--gray-400)',textAlign:'center',padding:'2rem'}}>
+            Products coming soon! 🛍️
+          </p>
         ) : (
           <div className="products-grid">
             {featured.map(p => <ProductCard key={p._id} product={p} />)}
@@ -87,35 +94,31 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── Banner strip ── */}
+      {/* Promo strip */}
       <section className="promo-strip">
         <div className="container promo-inner">
-          <div className="promo-item">
-            <span>🚚</span><p>Free Delivery over ₹999</p>
-          </div>
-          <div className="promo-item">
-            <span>🔄</span><p>Easy 30-Day Returns</p>
-          </div>
-          <div className="promo-item">
-            <span>🔐</span><p>Secure Payments</p>
-          </div>
-          <div className="promo-item">
-            <span>✨</span><p>Premium Quality</p>
-          </div>
+          <div className="promo-item"><span>🚚</span><p>Free Delivery over ₹999</p></div>
+          <div className="promo-item"><span>🔄</span><p>Easy 30-Day Returns</p></div>
+          <div className="promo-item"><span>🔐</span><p>Secure Payments</p></div>
+          <div className="promo-item"><span>✨</span><p>Premium Quality</p></div>
         </div>
       </section>
 
-      {/* ── AI Recommendations ── */}
+      {/* AI Recommendations */}
       <section className="section container">
         <AIRecommendations />
       </section>
 
-      {/* ── New Arrivals ── */}
+      {/* New Arrivals */}
       <section className="section container">
         <p className="section-label">Just Landed</p>
         <h2 className="section-title">New Arrivals</h2>
         {loading ? (
           <div className="spinner-wrap"><div className="spinner"></div></div>
+        ) : newArrivals.length === 0 ? (
+          <p style={{color:'var(--gray-400)',textAlign:'center',padding:'2rem'}}>
+            New arrivals coming soon! ✨
+          </p>
         ) : (
           <div className="products-grid">
             {newArrivals.map(p => <ProductCard key={p._id} product={p} />)}
@@ -123,7 +126,7 @@ const Home = () => {
         )}
       </section>
 
-      {/* ── Footer ── */}
+      {/* Footer */}
       <footer className="footer">
         <div className="container footer-inner">
           <div>
@@ -145,7 +148,7 @@ const Home = () => {
           <div>
             <h4>Developer</h4>
             <p style={{color:'var(--gold)',fontWeight:600}}>PAKKI BONISHA SIVANI</p>
-            <p style={{fontSize:'.8rem',color:'var(--gray-400)'}}>React · Node.js · MongoDB · Claude AI</p>
+            <p style={{fontSize:'.8rem',color:'var(--gray-400)'}}>React · Node.js · MongoDB · Gemini AI</p>
           </div>
         </div>
         <div className="footer-bottom container">
